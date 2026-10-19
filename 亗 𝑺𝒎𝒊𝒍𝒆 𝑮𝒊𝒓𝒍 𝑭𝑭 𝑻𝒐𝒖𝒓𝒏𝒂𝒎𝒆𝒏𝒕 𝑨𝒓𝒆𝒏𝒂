@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANEES YT Tournament | Free Fire Arena</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#08111f;--panel:#101e32;--panel2:#142640;--text:#f4f7ff;--muted:#aab8cf;--cyan:#39d9ff;--gold:#ffca58;--green:#39d98a;--red:#ff6b6b}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,sans-serif;background:radial-gradient(circle at top right,#16395a 0,#08111f 45%);color:var(--text)}
+header{padding:18px 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #24364e;position:sticky;top:0;background:#08111fee;backdrop-filter:blur(10px);z-index:3}
+.brand{font-weight:900;letter-spacing:.5px}.brand span{color:var(--cyan)}
+nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-size:14px}
+main{max-width:1080px;margin:auto;padding:26px 18px 60px}
+.hero{padding:36px 26px;border:1px solid #29415e;border-radius:24px;background:linear-gradient(125deg,#102641dd,#101a2ddd);display:grid;grid-template-columns:1.3fr .7fr;gap:20px;align-items:center}
+.eyebrow{color:var(--cyan);font-weight:800;font-size:12px;letter-spacing:2px}
+.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.04;margin:12px 0}
+.cta{display:inline-block;background:var(--cyan);color:#03111d;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:900;margin-top:8px}
+.emblem{border-radius:22px;min-height:190px;display:grid;place-items:center;background:linear-gradient(145deg,#173c5e,#0b1628);border:1px solid #315779;font-size:76px}
+.section-head{display:flex;align-items:end;justify-content:space-between;margin:30px 0 14px}
+.muted{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:var(--panel);border:1px solid #263c57;border-radius:18px;padding:18px}
+.pill{display:inline-block;border:1px solid #32627e;color:var(--cyan);font-size:11px;font-weight:800;padding:5px 8px;border-radius:99px}
+.stats{display:flex;justify-content:space-between;margin:15px 0;color:var(--muted);font-size:13px}
+.stats b{display:block;color:var(--text);font-size:18px}
+.btn{border:0;background:var(--cyan);color:#04111e;padding:11px 14px;border-radius:10px;font-weight:900;cursor:pointer;width:100%}
+.panel{margin-top:20px;background:var(--panel);border:1px solid #263c57;border-radius:20px;padding:22px}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;color:var(--muted);font-size:13px;margin:10px 0 6px}
+input,select{width:100%;padding:12px;border-radius:10px;border:1px solid #354b66;background:#091625;color:var(--text);font:inherit}
+.payment{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.paybox{padding:15px;border:1px dashed #48637f;border-radius:14px;background:#0b192a}
+.paybox b{display:block;margin:6px 0;color:var(--gold)}
+.status{margin-top:12px;padding:12px;border-radius:10px;background:#0c2a26;color:#8ff0c3;display:none;white-space:pre-wrap}
+footer{border-top:1px solid #24364e;text-align:center;padding:22px;color:var(--muted);font-size:12px}
+@media(max-width:760px){.hero,.grid,.formgrid,.payment{grid-template-columns:1fr}.emblem{min-height:120px;font-size:56px}nav{display:none}}
+.admin-table{width:100%;border-collapse:collapse;margin-top:15px;font-size:13px}
+.admin-table th,.admin-table td{border:1px solid #263c57;padding:8px;text-align:left}
+.admin-table th{background:#142640;color:var(--cyan)}
+.badge{padding:3px 7px;border-radius:4px;font-size:11px;font-weight:bold}
+.badge-pending{background:#ffc107;color:#000}
+.badge-approved{background:var(--green);color:#000}
+.badge-rejected{background:var(--red);color:#fff}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">🔥 ANEES YT <span>TOURNAMENT</span></div>
+  <nav>
+    <a href="#tournaments">Tournaments</a>
+    <a href="#slots">Book Slot</a>
+    <a href="#admin-sec">Admin Login</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div>
+      <div class="eyebrow">FREE FIRE CUSTOM ROOMS</div>
+      <h1>Play hard.<br><span style="color:var(--cyan)">Win big.</span></h1>
+      <p class="muted">Join official ANEES YT tournaments, submit your transaction ID, and reserve your slot!</p>
+      <a class="cta" href="#tournaments">Explore Tournaments</a>
+    </div>
+    <div class="emblem">🏆</div>
+  </section>
+
+  <div class="section-head" id="tournaments">
+    <h2>Upcoming Tournaments</h2>
+  </div>
+
+  <section class="grid">
+    <article class="card">
+      <span class="pill">SQUAD</span>
+      <h3>Booyah Battle #01</h3>
+      <p class="muted">Bermuda • 48 Slots</p>
+      <div class="stats">
+        <div>Entry Fee<b>Rs. 100</b></div>
+        <div>Prize Pool<b>Rs. 2,000</b></div>
+      </div>
+      <button class="btn" onclick="choose('Booyah Battle #01',100,48)">Book This Match</button>
+    </article>
+
+    <article class="card">
+      <span class="pill">DUO CUSTOM</span>
+      <h3>Duo Clash #02</h3>
+      <p class="muted">Purgatory • 24 Teams</p>
+      <div class="stats">
+        <div>Entry Fee<b>Rs. 80</b></div>
+        <div>Prize Pool<b>Rs. 1,200</b></div>
+      </div>
+      <button class="btn" onclick="choose('Duo Clash #02',80,24)">Book This Match</button>
+    </article>
+
+    <article class="card">
+      <span class="pill">SOLO CUSTOM</span>
+      <h3>Solo Survival #03</h3>
+      <p class="muted">Alpine • 48 Slots</p>
+      <div class="stats">
+        <div>Entry Fee<b>Rs. 50</b></div>
+        <div>Prize Pool<b>Rs. 800</b></div>
+      </div>
+      <button class="btn" onclick="choose('Solo Survival #03',50,48)">Book This Match</button>
+    </article>
+  </section>
+
+  <section class="panel" id="slots">
+    <div class="section-head" style="margin-top:0">
+      <h2>Reserve Your Slot</h2>
+    </div>
+
+    <form id="booking">
+      <div class="formgrid">
+        <div>
+          <label>Tournament</label>
+          <select id="event" required>
+            <option value="Booyah Battle #01">Booyah Battle #01 (Rs. 100)</option>
+            <option value="Duo Clash #02">Duo Clash #02 (Rs. 80)</option>
+            <option value="Solo Survival #03">Solo Survival #03 (Rs. 50)</option>
+          </select>
+        </div>
+        <div>
+          <label>Preferred Slot</label>
+          <select id="slot" required></select>
+        </div>
+        <div>
+          <label>In-Game Name</label>
+          <input id="player" required placeholder="Your Free Fire Name">
+        </div>
+        <div>
+          <label>Free Fire UID</label>
+          <input id="uid" required inputmode="numeric" placeholder="Your Player UID">
+        </div>
+        <div>
+          <label>WhatsApp / Phone</label>
+          <input id="contact" required inputmode="tel" placeholder="03xx xxxxxxx">
+        </div>
+      </div>
+
+      <div class="section-head"><h3 style="margin:0">Payment Details</h3></div>
+      <div class="payment">
+        <div class="paybox">
+          <strong>JazzCash</strong>
+          <b>0300XXXXXXX</b>
+          <span class="muted">Title: Anees Ahmad</span>
+        </div>
+        <div class="paybox">
+          <strong>Easypaisa</strong>
+          <b>0300XXXXXXX</b>
+          <span class="muted">Title: Anees Ahmad</span>
+        </div>
+      </div>
+
+      <div class="formgrid" style="margin-top:12px">
+        <div>
+          <label>Payment Method</label>
+          <select id="method" required>
+            <option value="JazzCash">JazzCash</option>
+            <option value="Easypaisa">Easypaisa</option>
+          </select>
+        </div>
+        <div>
+          <label>Transaction ID (TID)</label>
+          <input id="tx" required placeholder="Enter 11-digit TID">
+        </div>
+      </div>
+
+      <button class="btn" type="submit" style="margin-top:16px">Submit Booking Request</button>
+      <div class="status" id="status"></div>
+    </form>
+  </section>
+
+  <!-- ADMIN SECTION -->
+  <section class="panel" id="admin-sec">
+    <h2>Admin Dashboard</h2>
+    <div id="admin-login-box">
+      <label>Admin Pin</label>
+      <input type="password" id="admin-pin" placeholder="Enter Admin Pin (Default: 1234)">
+      <button class="btn" onclick="loginAdmin()" style="margin-top:10px">Login to View Bookings</button>
+    </div>
+
+    <div id="admin-panel-content" style="display:none;">
+      <button class="btn" onclick="loadBookings()" style="margin-bottom:10px;background:var(--gold);">🔄 Refresh Bookings</button>
+      <div style="overflow-x:auto;">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Player / UID</th>
+              <th>Tournament</th>
+              <th>Slot</th>
+              <th>Contact</th>
+              <th>Method / TID</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="bookings-list"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>🔥 ANEES YT Tournament Arena • Powered by Netlify & Supabase</footer>
+
+<script>
+const SUPABASE_URL = "https://jfcuqmphuaiavmwxfqsb.supabase.co";
+const SUPABASE_KEY = "EyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpmY3VxbmphdWlhdm13eGZxc2IiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTc5MTk4MTgzOCwiZXhwIjoyMTA3NTU3ODM4fQ.-t0E8ahX0XM4wMmez9VrUibrneU2vNPTCYVSS9FmLwU";
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const slotSelect = document.getElementById('slot');
+function refreshSlots(max=48){
+  slotSelect.innerHTML='';
+  for(let i=1;i<=max;i++){
+    const o=document.createElement('option');
+    o.value='Slot '+i;
+    o.textContent='Slot '+String(i).padStart(2,'0');
+    slotSelect.appendChild(o);
+  }
+}
+refreshSlots(48);
+
+function choose(name,fee,max){
+  document.getElementById('event').value=name;
+  refreshSlots(max);
+  document.getElementById('slots').scrollIntoView({behavior:'smooth'});
+}
+
+document.getElementById('booking').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const statusDiv = document.getElementById('status');
+  statusDiv.style.display='block';
+  statusDiv.textContent="Saving booking to database...";
+
+  const bookingData = {
+    tournament_name: document.getElementById('event').value,
+    slot_number: document.getElementById('slot').value,
+    player_name: document.getElementById('player').value,
+    freefire_uid: document.getElementById('uid').value,
+    whatsapp_number: document.getElementById('contact').value,
+    payment_method: document.getElementById('method').value,
+    transaction_id: document.getElementById('tx').value,
+    status: 'pending'
+  };
+
+  const { data, error } = await db.from('bookings').insert([bookingData]);
+
+  if(error){
+    statusDiv.style.background="#3d1414";
+    statusDiv.style.color="#ff9999";
+    statusDiv.textContent="Error saving booking: " + error.message;
+  } else {
+    statusDiv.style.background="#0c2a26";
+    statusDiv.style.color="#8ff0c3";
+    statusDiv.textContent="✅ Success! Your booking request has been submitted securely.\nAdmin will verify your payment TID: " + bookingData.transaction_id;
+    document.getElementById('booking').reset();
+  }
+});
+
+// ADMIN PANEL LOGIC
+function loginAdmin(){
+  const pin = document.getElementById('admin-pin').value;
+  if(pin === '1234'){ // Admin PIN is 1234
+    document.getElementById('admin-login-box').style.display='none';
+    document.getElementById('admin-panel-content').style.display='block';
+    loadBookings();
+  } else {
+    alert('Incorrect Admin PIN!');
+  }
+}
+
+async function loadBookings(){
+  const tbody = document.getElementById('bookings-list');
+  tbody.innerHTML = '<tr><td colspan="7">Loading bookings...</td></tr>';
+
+  const { data, error } = await db.from('bookings').select('*').order('created_at', { ascending: false });
+
+  if(error){
+    tbody.innerHTML = `<tr><td colspan="7">Error: ${error.message}</td></tr>`;
+    return;
+  }
+
+  if(data.length === 0){
+    tbody.innerHTML = '<tr><td colspan="7">No bookings found yet.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = '';
+  data.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><b>${item.player_name}</b><br><small>UID: ${item.freefire_uid}</small></td>
+      <td>${item.tournament_name}</td>
+      <td>${item.slot_number}</td>
+      <td>${item.whatsapp_number}</td>
+      <td><b>${item.payment_method}</b><br><small>TID: ${item.transaction_id}</small></td>
+      <td><span class="badge badge-${item.status}">${item.status.toUpperCase()}</span></td>
+      <td>
+        <button onclick="updateStatus('${item.id}', 'approved')" style="background:green;color:#fff;border:0;padding:4px 8px;border-radius:4px;cursor:pointer;">Approve</button>
+        <button onclick="updateStatus('${item.id}', 'rejected')" style="background:red;color:#fff;border:0;padding:4px 8px;border-radius:4px;cursor:pointer;">Reject</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+async function updateStatus(id, newStatus){
+  const { error } = await db.from('bookings').update({ status: newStatus }).eq('id', id);
+  if(error){
+    alert('Failed to update: ' + error.message);
+  } else {
+    loadBookings();
+  }
+}
+</script>
+</body>
+</html>
